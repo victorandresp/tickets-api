@@ -1,0 +1,10 @@
+{
+  "name": "tickets-api",
+  "version": "1.0.0",
+  "description": "RESTful in Node.js + Express + Typescript with N-tier architecture",
+  "main": "index.js",
+  "repository": "https://github.com/victorandresp/tickets-api.git",
+  "author": "victorandresp <ponceottamendi27@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
