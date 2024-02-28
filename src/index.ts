@@ -1,1 +1,2 @@
-console.log("Hello World!");
+const testVar: string = 'testt'
+console.log(`${testVar}`)
