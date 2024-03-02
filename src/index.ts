@@ -1,3 +1,5 @@
-import config from "./config/index"
+import container from "./startup/container";
 
-console.log(config)
+const server = container.resolve("app")
+
+server.start();
