@@ -9,8 +9,7 @@
   "private": false,
   "scripts": {
     "lint": "eslint src/**/*.ts --fix",
-    "dev": "nodemon --exec ts-node -r tsconfig-paths/register ./src/index.ts",
-    "prueba": "nodemon"
+    "dev": "nodemon --exec ts-node -r tsconfig-paths/register ./src/index.ts"
   },
   "dependencies": {
     "awilix": "^10.0.1",
