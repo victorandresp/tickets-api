@@ -7,7 +7,7 @@ const container = createContainer();
 
 container
     .register({
-        app: asClass(Server).singleton(),
+        // app: asClass(Server).singleton(),
         // router: asFunction(Routes).singleton(),
         config: asValue(config)
     })
