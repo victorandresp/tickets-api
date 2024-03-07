@@ -1,10 +1,15 @@
 import express, { Express } from "express"
+import { Config } from "@/config/config.interface"
 
-let _express: Express | null = null
-let _config: any | null = null
+interface ServerDependecies {
+  config: Config
+}
+
+let _express: Express
+let _config: Config
 
 export class Server {
-  constructor({ config }: any) {
+  constructor({ config }: ServerDependecies) {
     _config = config
     _express = express()
   }
