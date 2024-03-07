@@ -1,4 +1,5 @@
 import { createContainer } from "awilix"
+
 import startupResolver from "./startup.resolver"
 
 const container = createContainer()
