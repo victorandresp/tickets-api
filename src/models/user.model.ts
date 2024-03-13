@@ -1,6 +1,13 @@
 import { DataTypes, Model } from "sequelize"
 import { sequelize } from "@/index"
-class User extends Model {}
+class User extends Model {
+  declare firstName: string
+  declare lastName: string
+
+  getFullName(): string {
+    return this.firstName + " " + this.lastName
+  }
+}
 
 User.init(
   {
