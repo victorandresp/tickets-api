@@ -1,11 +1,16 @@
 import { DataTypes, Model } from "sequelize"
+const { compareSync } = require("bcryptjs")
 import { sequelize } from "@/index"
 class User extends Model {
   declare firstName: string
   declare lastName: string
+  declare password: string
 
   getFullName(): string {
     return this.firstName + " " + this.lastName
+  }
+  comparePassword(password: string): boolean {
+    return compareSync(password, this.password)
   }
 }
 
@@ -25,6 +30,10 @@ User.init(
       allowNull: false,
     },
     lastName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    password: {
       type: DataTypes.STRING,
       allowNull: false,
     },
