@@ -17,8 +17,9 @@ export const sequelize = new Sequelize(config.PG_DB, config.PG_USERNAME, config.
 
 sequelize
   .authenticate()
-  .then(() => {
+  .then(async () => {
     console.log("Connection has been established successfully.")
+    require("@/startup/layer-dependencies")
     server.start()
   })
   .catch((error) => console.error(error))
