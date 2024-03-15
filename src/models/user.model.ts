@@ -1,5 +1,5 @@
 import { DataTypes, Model } from "sequelize"
-const { compareSync } = require("bcryptjs")
+import bcrypt from "bcrypt"
 import { sequelize } from "@/index"
 class User extends Model {
   declare firstName: string
@@ -10,7 +10,7 @@ class User extends Model {
     return this.firstName + " " + this.lastName
   }
   comparePassword(password: string): boolean {
-    return compareSync(password, this.password)
+    return bcrypt.compareSync(password, this.password)
   }
 }
 
@@ -50,6 +50,7 @@ User.init(
     timestamps: true,
     sequelize,
     modelName: "User",
+    tableName: "users",
   },
 )
 
