@@ -1,8 +1,13 @@
 import { Response, Request } from "express"
+import { AuthService } from "@/interfaces/auth.interface"
 
-let _authService: null | any
+let _authService: AuthService
+
+interface AuthControllerDependencies {
+  AuthService: AuthService
+}
 class AuthController {
-  constructor({ AuthService }: any) {
+  constructor({ AuthService }: AuthControllerDependencies) {
     _authService = AuthService
   }
   async signUp(req: Request, res: Response) {
