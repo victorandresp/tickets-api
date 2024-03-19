@@ -1,6 +1,6 @@
 import { Router } from "express"
 
-import { AuthController } from "@/controllers/auth/auth.interface"
+import { AuthController } from "@/interfaces/auth.interface"
 
 interface AuthRoutesDependencies {
   AuthController: AuthController
