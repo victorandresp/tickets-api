@@ -3,6 +3,8 @@ import cors from "cors"
 import helmet from "helmet"
 import compression from "compression"
 
+import NotFoundMiddleware from "@/middlewares/not-found.middleware"
+
 import AuthRoutes from "@/routes/auth.routes"
 
 export default function () {
@@ -13,6 +15,8 @@ export default function () {
 
   apiRoutes.use("auth", AuthRoutes)
   router.use("/api/v1", apiRoutes)
+
+  router.use(NotFoundMiddleware)
 
   return router
 }
