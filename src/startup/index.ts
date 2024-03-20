@@ -1,17 +1,18 @@
-import express, { Express } from "express"
+import express, { Express, Router } from "express"
 import { Config } from "@/config/config.interface"
 
 interface ServerDependecies {
   config: Config
+  router: Router
 }
 
 let _express: Express
 let _config: Config
 
 export class Server {
-  constructor({ config }: ServerDependecies) {
+  constructor({ config, router }: ServerDependecies) {
     _config = config
-    _express = express()
+    _express = express().use(router)
   }
 
   start() {
