@@ -1,10 +1,13 @@
 import { User } from "@/interfaces/user.interface"
 
+let authRepository: any
 class AuthService {
-  constructor() {}
+  constructor({ AuthRepository }: any) {
+    authRepository = AuthRepository
+  }
 
   async signUp(user: User) {
-    console.log(user)
+    await authRepository.create(user)
   }
   async signIn(user: User) {
     console.log(user)
