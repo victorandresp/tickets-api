@@ -1,20 +1,16 @@
 import { Router } from "express"
 
-// import { AuthController } from "@/interfaces/auth.interface"
+import { AuthController as AuthControllerInterface } from "@/interfaces/auth.interface"
 
-// interface AuthRoutesDependencies {
-//   AuthController: AuthController
-// }
+interface AuthRoutesDependencies {
+  AuthController: AuthControllerInterface
+}
 
-export default function () {
+export default function ({ AuthController }: AuthRoutesDependencies) {
   const router = Router()
-  // console.log(AuthController)
 
-  router.post("/signup", function (req: any, res: any) {
-    console.log("called")
-    return res.status(201).send({ message: "test" })
-  })
-  // router.post("/signin", AuthController.signIn)
+  router.post("/signup", AuthController.signUp)
+  router.post("/signin", AuthController.signIn)
 
   return router
 }
