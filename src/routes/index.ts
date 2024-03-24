@@ -5,9 +5,7 @@ import compression from "compression"
 
 import NotFoundMiddleware from "@/middlewares/not-found.middleware"
 
-import AuthRoutes from "@/routes/auth.routes"
-
-export default function () {
+export default function ({ AuthRoutes }: any) {
   const router = express.Router()
   const apiRoutes = express.Router()
 
