@@ -1,7 +1,6 @@
 import container from "@/startup/container"
 import { Sequelize } from "sequelize"
 
-const server = container.resolve("app")
 const config = container.resolve("config")
 
 export const sequelize = new Sequelize(config.PG_DB, config.PG_USERNAME, config.PG_PASSWORD, {
@@ -20,6 +19,7 @@ sequelize
   .then(async () => {
     console.log("Connection has been established successfully.")
     require("@/startup/layer-dependencies")
+    const server = container.resolve("app")
     server.start()
   })
   .catch((error) => console.error(error))
