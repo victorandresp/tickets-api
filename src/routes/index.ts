@@ -2,7 +2,6 @@ import express from "express"
 import cors from "cors"
 import helmet from "helmet"
 import compression from "compression"
-
 import NotFoundMiddleware from "@/middlewares/not-found.middleware"
 
 export default function ({ AuthRoutes }: any) {
