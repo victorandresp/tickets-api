@@ -1,8 +1,14 @@
 import { User } from "@/interfaces/user.interface"
 
-let authRepository: any
+import { AuthRepository } from "@/interfaces/auth.interface"
+
+let authRepository: AuthRepository
+
+interface AuthServiceDependencies {
+  AuthRepository: AuthRepository
+}
 class AuthService {
-  constructor({ AuthRepository }: any) {
+  constructor({ AuthRepository }: AuthServiceDependencies) {
     authRepository = AuthRepository
   }
 

@@ -13,3 +13,7 @@ export interface AuthService {
   // eslint-disable-next-line no-unused-vars
   signUp(user: User): void
 }
+export interface AuthRepository {
+  // eslint-disable-next-line no-unused-vars
+  create(user: User): User
+}

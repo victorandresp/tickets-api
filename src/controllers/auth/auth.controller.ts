@@ -15,7 +15,7 @@ class AuthController {
     const createdUser = await _authService.signUp(body)
     return res.status(201).send(createdUser)
   }
-  
+
   async signIn(req: Request, res: Response) {
     const { body } = req
     const creds = await _authService.signIn(body)
