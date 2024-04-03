@@ -16,7 +16,6 @@ class AuthController {
       const createdUser = await _authService.signUp(body)
       return res.status(201).send(createdUser)
     } catch (error: any) {
-      // (to do) pass to middleware the controller error catching
       return res.status(error.status).send(error)
     }
   }
