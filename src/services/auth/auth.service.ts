@@ -16,8 +16,8 @@ class AuthService {
 
   async signUp(user: User) {
     if (!user.firstName || !user.lastName || !user.email) return ThrowHttpError(400, "Bad request")
-    if (isValidEmail(user.email)) return ThrowHttpError(400, "Enter a valid email")
-    await authRepository.create(user)
+    if (!isValidEmail(user.email)) return ThrowHttpError(400, "Enter a valid email")
+    return await authRepository.create(user)
   }
   async signIn(user: User) {
     console.log(user)
