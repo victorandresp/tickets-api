@@ -1,6 +1,6 @@
 import { User as UserInterface } from "@/interfaces/user.interface"
 
-let _user: UserInterface
+let _user: any
 
 interface AuthRepositoryDependencies {
   User: UserInterface
@@ -13,9 +13,8 @@ class AuthRepository {
   }
 
   async create(user: UserInterface) {
-    console.log(_user)
-    console.log(user)
-    // _user.create(user)
+    const createdUser = await _user.create(user) // todo: capture error
+    return createdUser
   }
 }
 
