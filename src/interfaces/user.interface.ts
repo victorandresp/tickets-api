@@ -9,3 +9,11 @@ export interface User {
   createdAt: string
   updatedAt: string
 }
+export interface UserService {
+  // eslint-disable-next-line no-unused-vars
+  getUserByEmail(email: string): User
+}
+export interface UserRepository {
+  // eslint-disable-next-line no-unused-vars
+  getUserByEmail(email: string): User
+}
