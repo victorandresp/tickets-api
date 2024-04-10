@@ -11,8 +11,7 @@ class UserService {
     _userRepostory = UserRepository
   }
   async getUserByEmail(email: string) {
-    console.log(email)
-    console.log(_userRepostory)
+    return _userRepostory.getUserByEmail(email) //Todo: Validate if not exists
   }
 }
 
