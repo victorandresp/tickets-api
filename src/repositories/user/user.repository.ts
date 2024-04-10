@@ -1,6 +1,6 @@
 import { User as UserInterface } from "@/interfaces/user.interface"
 
-let _user: UserInterface
+let _user: any
 
 interface UserRepositoryDependencies {
   User: UserInterface
@@ -13,8 +13,9 @@ class UserRepository {
   }
 
   async getUserByEmail(email: string) {
-    console.log(email)
-    console.log(_user)
+    const user = await _user.findOne({ where: { email } })
+    return user
+    // console.log(user)
   }
 }
 
