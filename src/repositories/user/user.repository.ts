@@ -8,14 +8,12 @@ interface UserRepositoryDependencies {
 
 class UserRepository {
   constructor({ User }: UserRepositoryDependencies) {
-    // super(User)
     _user = User
   }
 
   async getUserByEmail(email: string) {
     const user = await _user.findOne({ where: { email } })
     return user
-    // console.log(user)
   }
 }
 

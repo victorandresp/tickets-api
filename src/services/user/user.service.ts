@@ -11,7 +11,7 @@ class UserService {
     _userRepostory = UserRepository
   }
   async getUserByEmail(email: string) {
-    return _userRepostory.getUserByEmail(email) //Todo: Validate if not exists
+    return await _userRepostory.getUserByEmail(email)
   }
 }
 

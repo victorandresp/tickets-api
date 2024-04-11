@@ -21,8 +21,8 @@ class AuthService {
   async signUp(user: User) {
     if (!user.firstName || !user.lastName || !user.email) return ThrowHttpError(400, "Bad request")
     if (!isValidEmail(user.email)) return ThrowHttpError(400, "Enter a valid email")
-    const userRegister = await userService.getUserByEmail(user.email) // TODO: Validate if email exists
-    console.log("userRegister", userRegister)
+    const userRegister = await userService.getUserByEmail(user.email)
+    if (userRegister) return ThrowHttpError(409, "Email is already registered")
     return await authRepository.create(user)
   }
   async signIn(user: User) {
