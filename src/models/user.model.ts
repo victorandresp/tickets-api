@@ -1,6 +1,13 @@
 import { DataTypes, Model } from "sequelize"
 import bcrypt from "bcrypt"
 import { sequelize } from "@/index"
+
+interface UserAttributes {
+  id: number
+  password: string
+}
+
+interface UserInstance extends Model<UserAttributes>, UserAttributes {}
 class User extends Model {
   declare firstName: string
   declare lastName: string
@@ -53,5 +60,11 @@ User.init(
     tableName: "users",
   },
 )
+
+User.addHook("beforeCreate", (user: UserInstance) => {
+  const salt = bcrypt.genSaltSync(20)
+  const hashedPassword = bcrypt.hashSync(user.password, salt)
+  user.password = hashedPassword
+})
 
 export default User

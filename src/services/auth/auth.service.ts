@@ -24,6 +24,7 @@ class AuthService {
     if (!isValidPassword(user.password)) return ThrowHttpError(400, "Enter a valid password")
     const userRegister = await userService.getUserByEmail(user.email)
     if (userRegister) return ThrowHttpError(409, "Email is already registered")
+    // Todo: review why the query for check email registered is too slow
     return await authRepository.create(user)
   }
   async signIn(user: User) {
