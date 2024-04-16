@@ -62,7 +62,7 @@ User.init(
 )
 
 User.addHook("beforeCreate", (user: UserInstance) => {
-  const salt = bcrypt.genSaltSync(20)
+  const salt = bcrypt.genSaltSync(10)
   const hashedPassword = bcrypt.hashSync(user.password, salt)
   user.password = hashedPassword
 })
