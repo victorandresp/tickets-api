@@ -10,6 +10,7 @@ class UserService {
   constructor({ UserRepository }: UserServiceDependencies) {
     _userRepostory = UserRepository
   }
+
   async getUserByEmail(email: string) {
     return await _userRepostory.getUserByEmail(email)
   }
