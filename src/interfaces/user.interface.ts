@@ -8,6 +8,8 @@ export interface User {
   verifiedAccount: boolean
   createdAt: string
   updatedAt: string
+  // eslint-disable-next-line no-unused-vars
+  comparePassword(password: string): boolean
 }
 export interface UserService {
   // eslint-disable-next-line no-unused-vars
