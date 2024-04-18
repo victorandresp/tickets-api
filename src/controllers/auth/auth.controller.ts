@@ -21,9 +21,13 @@ class AuthController {
   }
 
   async signIn(req: Request, res: Response) {
-    const { body } = req
-    const creds = await _authService.signIn(body)
-    return res.send(creds)
+    try {
+      const { body } = req
+      const creds = await _authService.signIn(body)
+      return res.send(creds)
+    } catch (error: any) {
+      return res.status(error.status).send(error)
+    }
   }
 }
 
