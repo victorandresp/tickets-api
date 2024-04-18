@@ -29,7 +29,8 @@ class AuthService {
   async signIn(user: User) {
     if (!isValidEmail(user.email)) return ThrowHttpError(400, "Enter a valid email")
     const userExists = await userService.getUserByEmail(user.email)
-    if (!userExists) return ThrowHttpError(401, "User dont exists")
+    if (!userExists) return ThrowHttpError(404, "User dont exists")
+    if (!userExists.comparePassword(user.password)) return ThrowHttpError(404, "Email or password invalid")
     return userExists
   }
 }
