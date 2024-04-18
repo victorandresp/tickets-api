@@ -27,7 +27,10 @@ class AuthService {
     return await authRepository.create(user)
   }
   async signIn(user: User) {
-    console.log(user)
+    if (!isValidEmail(user.email)) return ThrowHttpError(400, "Enter a valid email")
+    const userExists = await userService.getUserByEmail(user.email)
+    if (!userExists) return ThrowHttpError(401, "User dont exists")
+    return userExists
   }
 }
 
