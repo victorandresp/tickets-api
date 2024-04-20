@@ -4,6 +4,7 @@ import { UserService } from "@/interfaces/user.interface"
 
 import { ThrowHttpError } from "@/helpers/http.helpers"
 import { isValidEmail, isValidPassword } from "@/helpers/user.helpers"
+import { signToken } from "@/helpers/auth.helpers"
 
 let authRepository: AuthRepository
 let userService: UserService
@@ -31,7 +32,7 @@ class AuthService {
     const userExists = await userService.getUserByEmail(user.email)
     if (!userExists) return ThrowHttpError(404, "User dont exists")
     if (!userExists.comparePassword(user.password)) return ThrowHttpError(404, "Email or password invalid")
-    return userExists
+    return signToken({ email: user.email }) // To do: return expires date
   }
 }
 
