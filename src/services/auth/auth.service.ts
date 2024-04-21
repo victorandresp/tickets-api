@@ -32,7 +32,11 @@ class AuthService {
     const userExists = await userService.getUserByEmail(user.email)
     if (!userExists) return ThrowHttpError(404, "User dont exists")
     if (!userExists.comparePassword(user.password)) return ThrowHttpError(404, "Email or password invalid")
-    return signToken({ email: user.email }) // To do: return expires date
+    return signToken({
+      id: userExists.id,
+      email: userExists.email,
+      uid: userExists.uid,
+    }) // To do: return expires date
   }
 }
 
