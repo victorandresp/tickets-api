@@ -36,7 +36,7 @@ class AuthService {
       id: userExists.id,
       email: userExists.email,
       uid: userExists.uid,
-    }) // To do: return expires date
+    })
   }
 }
 
