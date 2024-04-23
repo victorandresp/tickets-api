@@ -30,14 +30,17 @@ class AuthService {
   async signIn(user: User) {
     if (!isValidEmail(user.email)) return ThrowHttpError(400, "Enter a valid email")
     if (!user.password) return ThrowHttpError(400, "Enter a password")
-    const userExists = await userService.getUserByEmail(user.email)
+    let userExists = await userService.getUserByEmail(user.email)
     if (!userExists) return ThrowHttpError(404, "User dont exists")
     if (!userExists.comparePassword(user.password)) return ThrowHttpError(404, "Email or password invalid")
-    return signToken({
+    userExists = userExists.get()
+    delete userExists.password
+    const token = signToken({
       id: userExists.id,
       email: userExists.email,
       uid: userExists.uid,
     })
+    return { ...userExists, token }
   }
 }
 
