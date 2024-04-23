@@ -1,4 +1,5 @@
 export interface User {
+  get(): User
   id: number
   uid: string
   firstName: string
