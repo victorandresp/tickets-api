@@ -3,7 +3,7 @@ export interface User {
   uid: string
   firstName: string
   lastName: string
-  password: string
+  password?: string
   email: string
   verifiedAccount: boolean
   createdAt: string
