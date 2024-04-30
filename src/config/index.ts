@@ -12,5 +12,4 @@ const config = {
   PG_PASSWORD: process.env.PG_PASSWORD,
   PG_HOST: process.env.PG_HOST,
 }
-
 export default config
