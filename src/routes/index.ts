@@ -11,6 +11,7 @@ export default function ({ AuthRoutes }: any) {
   apiRoutes.use(express.json()).use(cors()).use(helmet()).use(compression())
 
   apiRoutes.use("/auth", AuthRoutes)
+
   router.use("/api/v1", apiRoutes)
 
   router.use(NotFoundMiddleware)
