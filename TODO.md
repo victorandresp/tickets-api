@@ -3,6 +3,7 @@
 ## Auth
 - [ ] Login
 - [ ] Sign up
+- [ ] Verification Account by number code
 - [ ] Password recover
 
 ## User Profile
