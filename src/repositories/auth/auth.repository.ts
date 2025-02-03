@@ -14,6 +14,8 @@ class AuthRepository {
 
   async create(user: UserInterface) {
     const createdUser = await _user.create(user) // todo: capture error
+    delete createdUser.password
+    delete createdUser.verificationCode
     return createdUser
   }
 }
