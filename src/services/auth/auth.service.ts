@@ -6,6 +6,8 @@ import { ThrowHttpError } from "@/helpers/http.helpers"
 import { isValidEmail, isValidPassword } from "@/helpers/user.helpers"
 import { signToken } from "@/helpers/auth.helpers"
 
+import bcrypt from "bcrypt"
+
 let authRepository: AuthRepository
 let userService: UserService
 
@@ -25,6 +27,9 @@ class AuthService {
     if (!isValidPassword(user.password)) return ThrowHttpError(400, "Enter a valid password")
     const userRegister = await userService.getUserByEmail(user.email)
     if (userRegister) return ThrowHttpError(409, "Email is already registered")
+    const { code, hashedCode } = this.generateVerificationCode()
+    user.verificationCode = hashedCode
+    this.sendVerificationEmail(user.email, code)
     return await authRepository.create(user)
   }
   async signIn(user: User) {
@@ -41,6 +46,20 @@ class AuthService {
       uid: userExists.uid,
     })
     return { ...userExists, token }
+  }
+  generateVerificationCode(){
+    let code: number|string = Math.floor(Math.random() * 10000); 
+    if(code < 1000){ code = code+1000 }
+    code = code.toString()
+    const salt = bcrypt.genSaltSync(8)
+    const hashedCode = bcrypt.hashSync(code, salt)
+    return { code, hashedCode }
+  }
+  async sendVerificationEmail(email: string, code: string){
+    return console.log(`Simulated email sended to ${email} and code ${code}.`);
+  }
+  compareVerificationCode(code: any, verificationCodeHash: string){
+    return bcrypt.compareSync(code, verificationCodeHash);
   }
 }
 
