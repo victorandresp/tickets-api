@@ -48,9 +48,13 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    verificationCode:{
+      type: DataTypes.STRING,
+      allowNull: true
+    },
     verifiedAccount: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true,
+      defaultValue: false,
     },
   },
   {

@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "admin",
+    "password": "test123",
+    "database": "tickets_bd",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "admin",
+    "password": "test123",
+    "database": "tickets_bd",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "admin",
+    "password": "test123",
+    "database": "tickets_bd",
+    "host": "localhost",
+    "dialect": "postgres"
+  }
+}
