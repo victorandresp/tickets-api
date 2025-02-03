@@ -20,3 +20,8 @@
 - [ ] Edit ticket
 - [ ] Delete ticket
 - [ ] Show all tickets created
+
+================================================================
+
+## Beside Tasks
+- [ ] add env variables for config/config.json for sequelize migrations
