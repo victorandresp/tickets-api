@@ -7,7 +7,7 @@ export interface User {
   password?: string
   email: string
   verifiedAccount: boolean
-  verificationCode: string
+  verificationCode?: string
   createdAt: string
   updatedAt: string
   // eslint-disable-next-line no-unused-vars
@@ -16,8 +16,10 @@ export interface User {
 export interface UserService {
   // eslint-disable-next-line no-unused-vars
   getUserByEmail(email: string): User
+  update(id:number, user: Partial<User>) : User
 }
 export interface UserRepository {
   // eslint-disable-next-line no-unused-vars
   getUserByEmail(email: string): User
+  update(id:number, user: Partial<User>) : User
 }

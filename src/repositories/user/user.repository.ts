@@ -15,6 +15,9 @@ class UserRepository {
     const user = await _user.findOne({ where: { email } })
     return user
   }
+  async update(id:number, user: Partial<UserInterface>){
+    return await _user.update(user, { where: { id: id } })
+  }
 }
 
 export default UserRepository
