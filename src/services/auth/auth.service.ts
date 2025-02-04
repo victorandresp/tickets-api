@@ -25,21 +25,36 @@ class AuthService {
     if (!user.firstName || !user.lastName || !user.email || !user.password) return ThrowHttpError(400, "Bad request")
     if (!isValidEmail(user.email)) return ThrowHttpError(400, "Enter a valid email")
     if (!isValidPassword(user.password)) return ThrowHttpError(400, "Enter a valid password")
+      
     const userRegister = await userService.getUserByEmail(user.email)
     if (userRegister) return ThrowHttpError(409, "Email is already registered")
+
     const { code, hashedCode } = this.generateVerificationCode()
     user.verificationCode = hashedCode
     this.sendVerificationEmail(user.email, code)
+
     return await authRepository.create(user)
   }
   async signIn(user: User) {
     if (!isValidEmail(user.email)) return ThrowHttpError(400, "Enter a valid email")
     if (!user.password) return ThrowHttpError(400, "Enter a password")
+
     let userExists = await userService.getUserByEmail(user.email)
     if (!userExists) return ThrowHttpError(404, "User dont exists")
+
     if (!userExists.comparePassword(user.password)) return ThrowHttpError(404, "Email or password invalid")
     userExists = userExists.get()
+  
     delete userExists.password
+    delete userExists.verificationCode
+
+    if(!userExists.verifiedAccount){
+      const { code, hashedCode } = this.generateVerificationCode()
+      await userService.update(userExists.id, { verificationCode: hashedCode })
+      this.sendVerificationEmail(user.email, code)
+      return ThrowHttpError(403, "Email not verified, an code has sended to the email")
+    } 
+    
     const token = signToken({
       id: userExists.id,
       email: userExists.email,
