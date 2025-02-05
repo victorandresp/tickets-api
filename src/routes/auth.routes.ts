@@ -12,6 +12,7 @@ export default function ({ AuthController }: AuthRoutesDependencies) {
 
   router.post("/signup", AuthController.signUp)
   router.post("/signin", AuthController.signIn)
+  router.post("/verify-code", AuthController.verifyCode)
   router.post("/test", [JwtAuth], (req: any, res: any) => {
     return res.status(200).send("Its a valid session")
   })
