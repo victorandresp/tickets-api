@@ -52,7 +52,7 @@ class AuthService {
       const { code, hashedCode } = this.generateVerificationCode()
       await userService.update(userExists.id, { verificationCode: hashedCode })
       this.sendVerificationEmail(user.email, code)
-      return ThrowHttpError(403, "Email not verified, an code has sended to the email")
+      return ThrowHttpError(403, "Email not verified, an code has sended to the email", { user: user.email })
     } 
     
     const token = signToken({
@@ -73,8 +73,30 @@ class AuthService {
   async sendVerificationEmail(email: string, code: string){
     return console.log(`Simulated email sended to ${email} and code ${code}.`);
   }
-  compareVerificationCode(code: any, verificationCodeHash: string){
+  compareVerificationCode(code: string, verificationCodeHash: string ){
     return bcrypt.compareSync(code, verificationCodeHash);
+  }
+  async verifyCode({ email, code }: { email:string, code:string }){
+    if (!isValidEmail(email)) return ThrowHttpError(400, "Enter a valid email")
+
+    let userExists = await userService.getUserByEmail(email)
+    if (!userExists) return ThrowHttpError(404, "User dont exists")
+
+    userExists = userExists.get()
+    
+    const compareCode = this.compareVerificationCode(code, userExists.verificationCode as string)
+    if(!compareCode){
+      return ThrowHttpError(400, "Invalid Code")
+    }
+
+    await userService.update(userExists.id, { verificationCode: null, verifiedAccount: true })
+
+    const token = signToken({
+      id: userExists.id,
+      email: userExists.email,
+      uid: userExists.uid,
+    })
+    return { ...userExists, token }
   }
 }
 

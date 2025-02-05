@@ -7,7 +7,7 @@ export interface User {
   password?: string
   email: string
   verifiedAccount: boolean
-  verificationCode?: string
+  verificationCode?: string | null
   createdAt: string
   updatedAt: string
   // eslint-disable-next-line no-unused-vars
