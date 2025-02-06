@@ -83,13 +83,16 @@ class AuthService {
     if (!userExists) return ThrowHttpError(404, "User dont exists")
 
     userExists = userExists.get()
-    
+
     const compareCode = this.compareVerificationCode(code, userExists.verificationCode as string)
     if(!compareCode){
       return ThrowHttpError(400, "Invalid Code")
     }
 
     await userService.update(userExists.id, { verificationCode: null, verifiedAccount: true })
+
+    delete userExists.password
+    delete userExists.verificationCode
 
     const token = signToken({
       id: userExists.id,
