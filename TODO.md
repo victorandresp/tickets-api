@@ -1,9 +1,9 @@
 # Todo List for API Endpoints
 
 ## Auth
-- [ ] Login
-- [ ] Sign up
-- [ ] Verification Account by number code
+- [x] Login
+- [x] Sign up
+- [x] Verification Account by number code
 - [ ] Password recover
 
 ## User Profile
